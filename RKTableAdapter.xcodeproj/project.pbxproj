@@ -391,13 +391,6 @@
 			path = Section;
 			sourceTree = "<group>";
 		};
-		BBB7ACCF211CA3C7004BA563 /* StandardCollectionCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StandardCollectionCells;
-			sourceTree = "<group>";
-		};
 		BBB7ACD0211CA476004BA563 /* TableAdapter */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,7 +405,6 @@
 		BBB7ACD1211CA483004BA563 /* CollectionAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				BBB7ACCF211CA3C7004BA563 /* StandardCollectionCells */,
 				BBB7ACD2211CA498004BA563 /* Callbacks */,
 				BBB7ACCB211C6CB3004BA563 /* CollectionViewAdapter.swift */,
 				BBB7ACCD211C6CC9004BA563 /* CollectionViewAdapterDelegate.swift */,

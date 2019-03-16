@@ -16,6 +16,9 @@ open class ItemConfigurable: DeepHashable, UniqIdentifier {
     var cellType: AnyClass {
         preconditionFailure("This method must be overridden")
     }
+    
+    /// nib ячейки
+    var cellNib: UINib?
 
     // MARK: Configure
     /// Метод конфигурации ячейки TableView с помощью viewModel

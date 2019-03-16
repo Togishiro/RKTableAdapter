@@ -37,13 +37,17 @@ open class CollectionViewAdapter {
     fileprivate func registerCells(sections: [CollectionSection]) {
         for section in sections {
             for row in section.rows {
-                collectionView.register(row.cellType, forCellWithReuseIdentifier: row.reuseId)
+                if let cellNib = row.cellNib {
+                    collectionView.register(cellNib, forCellWithReuseIdentifier: row.reuseId)
+                } else {
+                    collectionView.register(row.cellType, forCellWithReuseIdentifier: row.reuseId)
+                }
             }
         }
     }
 
     // MARK: - Reload
-    public func reload(with collectionList: CollectionList? = nil) {
+    public func reload(with collectionList: CollectionList? = nil, completion: ((Bool) -> Void)?) {
         registerCells(sections: collectionList?.sections ?? [])
 
         updQueue.async { [weak self] in
@@ -63,11 +67,12 @@ open class CollectionViewAdapter {
 
                 if oldList.sections.isEmpty || sself._list.sections.isEmpty {
                     sself.collectionView.reloadData()
+                    completion?(true)
                 } else {
                     sself.batchUpdater.batchUpdate(collectionView: sself.collectionView,
                                                    oldSections: oldList.sections,
                                                    newSections: sself.list.sections,
-                                                   completion: nil)
+                                                   completion: completion)
                 }
             }
         }

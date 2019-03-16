@@ -14,10 +14,10 @@ extension UITableView {
             endUpdates()
             
             reloadRows(at: rowsChanges.updates.map { $0.new }, with: .fade)
-
-            if let completion = completion {
-                completion(true)
-            }
+        }
+        
+        if let completion = completion {
+            completion(true)
         }
     }
 

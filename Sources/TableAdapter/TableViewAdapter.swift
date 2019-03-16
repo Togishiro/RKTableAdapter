@@ -34,13 +34,17 @@ open class TableViewAdapter {
     fileprivate func registerCells(sections: [TableSection]) {
         for section in sections {
             for row in section.rows {
-                tableView.register(row.cellType, forCellReuseIdentifier: row.reuseId)
+                if let cellNib = row.cellNib {
+                    tableView.register(cellNib, forCellReuseIdentifier: row.reuseId)
+                } else {
+                    tableView.register(row.cellType, forCellReuseIdentifier: row.reuseId)
+                }
             }
         }
     }
 
     // MARK: - Reload
-    public func reload(with tableList: TableList? = nil) {
+    public func reload(with tableList: TableList? = nil, completion: ((Bool) -> Void)?) {
         registerCells(sections: tableList?.sections ?? [])
 
         let oldList = self._list
@@ -53,12 +57,13 @@ open class TableViewAdapter {
 
         if oldList.sections.isEmpty || _list.sections.isEmpty {
             tableView.reloadData()
+            completion?(true)
             return
         }
 
         batchUpdater.batchUpdate(tableView: tableView,
                                  oldSections: oldList.sections,
                                  newSections: list.sections,
-                                 completion: nil)
+                                 completion: completion)
     }
 }
