@@ -5,7 +5,7 @@ open class CollectionItem<CellType: ConfigurableCell>: CollectionItemConfigurabl
     /// Модель данных
     public private(set) var viewModel: CellType.ViewModelType
 
-    override var cellVM: CollectionCellVM {
+    override open var cellVM: CollectionCellVM {
         return viewModel as! CollectionCellVM
     }
 

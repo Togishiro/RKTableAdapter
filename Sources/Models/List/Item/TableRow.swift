@@ -5,7 +5,7 @@ open class TableRow<CellType: ConfigurableCell>: TableRowConfigurable {
     /// Модель данных
     public private(set) var viewModel: CellType.ViewModelType
 
-    override var cellVM: TableCellVM {
+    override open var cellVM: TableCellVM {
         return viewModel as! TableCellVM
     }
 

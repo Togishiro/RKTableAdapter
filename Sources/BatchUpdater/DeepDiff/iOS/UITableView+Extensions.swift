@@ -10,9 +10,9 @@ import UIKit
 
 public extension UITableView {
     #if swift(>=4.2)
-    public typealias TableViewRowAnimation = UITableView.RowAnimation
+    typealias TableViewRowAnimation = UITableView.RowAnimation
     #else
-    public typealias TableViewRowAnimation = UITableViewRowAnimation
+    typealias TableViewRowAnimation = UITableViewRowAnimation
     #endif
 
     /// Animate reload in a batch update
@@ -24,7 +24,7 @@ public extension UITableView {
     ///   - deletionAnimation: The animation for delete rows
     ///   - replacementAnimation: The animation for reload rows
     ///   - completion: Called when operation completes
-    public func reload<T: DeepHashable>(
+    func reload<T: DeepHashable>(
         changes: [Change<T>],
         section: Int = 0,
         insertionAnimation: TableViewRowAnimation = .automatic,

@@ -57,6 +57,7 @@ open class TableViewAdapter {
 
         if oldList.sections.isEmpty || _list.sections.isEmpty {
             tableView.reloadData()
+            tableView.layoutIfNeeded()
             completion?(true)
             return
         }
