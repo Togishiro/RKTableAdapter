@@ -1,8 +1,5 @@
 import UIKit
 
-@available(*, deprecated, renamed: "TableRowConfigurable")
-typealias RowConfigurable = TableRowConfigurable
-
 /// :nodoc:
 open class ItemConfigurable: DeepHashable, UniqIdentifier {
     // MARK: Properties

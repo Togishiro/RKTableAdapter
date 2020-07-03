@@ -1,8 +1,5 @@
 import Foundation
 
-@available(*, deprecated, renamed: "TableCellVM")
-public typealias CellVM = TableCellVM
-
 /// Родительский класс для любой ViewModel ячейки
 open class SuperCellVM {
     // MARK: Types
