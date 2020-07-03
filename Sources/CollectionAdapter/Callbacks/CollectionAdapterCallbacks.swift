@@ -6,50 +6,28 @@ open class CollectionAdapterCallbacks {
 
     // MARK: - Props
 
-    // MARK: - Edit
+//    // MARK: - Edit
 //    #if swift(>=4.2)
 //    public typealias TableViewCellEditingStyle = UITableViewCell.EditingStyle
 //    #else
 //    public typealias TableViewCellEditingStyle = UITableViewCellEditingStyle
 //    #endif
-//
+
 //    public typealias CanEditRow = (UITableView, IndexPath, CollectionData) -> Bool
 //    public typealias EditingStyleRow = (UITableView, IndexPath, CollectionData) -> TableViewCellEditingStyle
 //    public typealias CommitEditRow = (UITableView, IndexPath, TableViewCellEditingStyle, CollectionData) -> Void
 //
-//    private(set) var canEditRow: CanEditRow?
-//    private(set) var editingStyleRow: EditingStyleRow?
-//    private(set) var commitEditRow: CommitEditRow?
-//
-//    public func setCanEditRow(_ block: CanEditRow?) {
-//        canEditRow = block
-//    }
-//    public func setEditingStyleRow(_ block: EditingStyleRow?) {
-//        editingStyleRow = block
-//    }
-//    public func setCommitEditRow(_ block: CommitEditRow?) {
-//        commitEditRow = block
-//    }
+//    public var canEditRow: CanEditRow?
+//    public var editingStyleRow: EditingStyleRow?
+//    public var commitEditRow: CommitEditRow?
+    
+    public typealias WillDisplayCell = (UICollectionView, UICollectionViewCell, CollectionData) -> Void
+    public var willDisplayCell: WillDisplayCell?
 
-    // MARK: - Header / Footer
-//    public typealias WillDisplayHeaderFooterView = (UITableView, UIView, AdapterSection, Int) -> Void
-//    public typealias DidEndDisplayHeaderFooterView = WillDisplayHeaderFooterView
-//
-//    private(set) var willDisplayHeaderView: WillDisplayHeaderFooterView?
-//    private(set) var willDisplayFooterView: WillDisplayHeaderFooterView?
-//    private(set) var didEndDisplayHeaderView: DidEndDisplayHeaderFooterView?
-//    private(set) var didEndDisplayFooterView: DidEndDisplayHeaderFooterView?
-//
-//    public func setWillDisplayHeaderView(_ block: WillDisplayHeaderFooterView?) {
-//        willDisplayHeaderView = block
-//    }
-//    public func setWillDisplayFooterView(_ block: WillDisplayHeaderFooterView?) {
-//        willDisplayFooterView = block
-//    }
-//    public func setDidEndDisplayHeaderView(_ block: DidEndDisplayHeaderFooterView?) {
-//        didEndDisplayHeaderView = block
-//    }
-//    public func setDidEndDisplayFooterView(_ block: DidEndDisplayHeaderFooterView?) {
-//        didEndDisplayFooterView = block
-//    }
+//     MARK: - Header / Footer
+    public typealias WillDisplayCollectionReusableView = (UICollectionView, UICollectionReusableView, Int) -> Void
+    public typealias DidEndDisplayCollectionReusableView = WillDisplayCollectionReusableView
+
+    public var willDisplayCollectionReusableView: WillDisplayCollectionReusableView?
+    public var didEndDisplayCollectionReusableView: DidEndDisplayCollectionReusableView?
 }

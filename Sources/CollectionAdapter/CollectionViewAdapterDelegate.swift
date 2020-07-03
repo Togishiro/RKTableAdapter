@@ -26,7 +26,9 @@ UICollectionViewDelegateFlowLayout {
 
     // MARK: - UICollectionViewDelegateFlowLayout
     // MARK: Size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let row = holder.list.sections[indexPath.section].rows[indexPath.row]
 
         guard let size = row.cellVM.defaultSize ?? row.cellVM.estimatedSize else {
@@ -37,7 +39,8 @@ UICollectionViewDelegateFlowLayout {
 
     // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
     // MARK: Selecting
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         guard let section = section(for: indexPath.section),
             let row = row(for: section, index: indexPath.row)
             else { return }
@@ -55,12 +58,14 @@ UICollectionViewDelegateFlowLayout {
         return holder.list.sections.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return holder.list.sections[section].numberOfRows
     }
 
     // MARK: Cell
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let row = section(for: indexPath.section)?.rows[indexPath.row] else { fatalError() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: row.reuseId, for: indexPath)
 
@@ -72,15 +77,22 @@ UICollectionViewDelegateFlowLayout {
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let row = section(for: indexPath.section)?.rows[indexPath.row] else { return }
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        guard let section = section(for: indexPath.section) else { return }
+        let row = section.rows[indexPath.row]
 
         if let bindingCell = cell as? BindingCell & ConfigureCell {
             row.cellVM.bind(view: bindingCell)
         }
+        
+        holder.callbacks.willDisplayCell?(collectionView, cell, (section, row))
     }
 
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didEndDisplaying cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
         if let bindingCell = cell as? BindingCell {
             bindingCell.unbind()
         }
